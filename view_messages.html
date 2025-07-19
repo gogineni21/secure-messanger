@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card p-4 mb-4">
+    <h2 class="card-title mb-4">Decrypt and View Messages</h2>
+    <p class="text-muted">Enter your current location and the shared passphrase to attempt decryption.</p>
+    <form method="post">
+        <div class="row g-3">
+            <div class="col-md">
+                <label for="lat" class="form-label">Your Current Latitude</label>
+                <input type="text" class="form-control" id="lat" name="lat" required>
+            </div>
+            <div class="col-md">
+                <label for="lng" class="form-label">Your Current Longitude</label>
+                <input type="text" class="form-control" id="lng" name="lng" required>
+            </div>
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="passphrase" class="form-label">Shared Passphrase</label>
+            <input type="password" class="form-control" id="passphrase" name="passphrase" required>
+        </div>
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Fetch and Decrypt Messages</button>
+        </div>
+    </form>
+</div>
+
+<div class="card p-4">
+    <h3 class="card-title">Decrypted Messages</h3>
+    {% if messages %}
+        <div class="list-group">
+            {% for msg in messages %}
+                <div class="list-group-item list-group-item-action flex-column align-items-start bg-dark text-white border-secondary">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">From: {{ msg.sender }}</h5>
+                    </div>
+                    <p class="mb-1">{{ msg.content }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-muted">No messages to display. Submit your details above to check.</p>
+    {% endif %}
+</div>
+{% endblock %}

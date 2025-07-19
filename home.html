@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card p-4">
+    <h2 class="card-title mb-4">Send a Secure, Location-Locked Message</h2>
+    <form method="post">
+        <div class="mb-3">
+            <label for="recipient" class="form-label">Recipient Username</label>
+            <input type="text" class="form-control" id="recipient" name="recipient" required>
+        </div>
+        <div class="mb-3">
+            <label for="message" class="form-label">Message</label>
+            <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="passphrase" class="form-label">Shared Passphrase (Secret Key)</label>
+            <input type="password" class="form-control" id="passphrase" name="passphrase" required>
+        </div>
+        
+        <hr class="my-4">
+        
+        <h5>📍 Location Lock</h5>
+        <p class="text-muted small">The recipient must be within this geographic area to view the message.</p>
+        <div class="row g-3">
+            <div class="col-md">
+                <label for="receiver_lat" class="form-label">Required Latitude</label>
+                <input type="text" class="form-control" id="receiver_lat" name="receiver_lat" placeholder="e.g., 40.7128" required>
+            </div>
+            <div class="col-md">
+                <label for="receiver_lng" class="form-label">Required Longitude</label>
+                <input type="text" class="form-control" id="receiver_lng" name="receiver_lng" placeholder="e.g., -74.0060" required>
+            </div>
+            <div class="col-md">
+                <label for="radius" class="form-label">Radius (km)</label>
+                <input type="number" step="0.1" class="form-control" id="radius" name="radius" value="1.0" required>
+            </div>
+        </div>
+        
+        <div class="d-grid mt-4">
+            <button type="submit" class="btn btn-success">Encrypt and Send</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
